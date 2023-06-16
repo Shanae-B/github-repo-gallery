@@ -3,6 +3,9 @@
 const profileOverview = document.querySelector(".overview");
 const username = "Shanae-B";
 const repoList = document.querySelector(".repo-list");
+const repoElement = document.querySelector(".repos");
+const eachRepoData = document.querySelector(".repo-data");
+
 
 //fetch Github profile info
 const getData = async function () {
@@ -40,6 +43,7 @@ const fetchRepos = async function () {
     displayEachRepo(repoData);
 };
 
+//display list of repos
 const displayEachRepo = function (repos) {
 
     for (const repo of repos) {
