@@ -17,7 +17,7 @@ getData();
 //display fetched user info
 const displayData = function (data) {
 
-    const div= document.createElement("div");
+    const div = document.createElement("div");
     div.classList.add("user-info");
     div.innerHTML = `<figure>
     <img alt="user avatar" src=${data.avatar_url} />
@@ -29,12 +29,25 @@ const displayData = function (data) {
       <p><strong>Number of public repos:</strong> ${data.public_repos}</p>
       </div>`;
     profileOverview.append(div);
+    fetchRepos();
 };
 
+
+//Fetch Repos
 const fetchRepos = async function () {
-    const repos = await fetch ('https://api.github.com/users/Shanae-B/repos')
+    const gitRepos = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+    const repoData = await gitRepos.json();
+    displayEachRepo(repoData);
+};
 
+const displayEachRepo = function (repos) {
 
+    for (const repo of repos) {
+        const li = document.createElement("li");
+        li.classList.add("repo");
+        li.innerHTML = `<h3>${repo.name}</h3>`;
+        repoList.append(li);
+    }
 };
 
 //displayData(data);
