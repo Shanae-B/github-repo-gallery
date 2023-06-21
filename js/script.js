@@ -54,4 +54,22 @@ const displayEachRepo = function (repos) {
     }
 };
 
+ //Function to get specific repo info
+ const specificRepo = async function (repoName) {
+    const exactRepo = await fetch (`https://api.github.com/repos/${username}/${repo}`);
+    const repoInfo = await exactRepo.json ();
+    console.log(repoInfo);
+
+};
+
 //displayData(data);
+repoList.addEventListener("click", function(e){
+
+    if (e.target.matches("h3")) {
+        const repoName = document.querySelector("repo.name h3");
+        repoName.innerText = " ";
+        specificRepo(repoName);
+    }
+
+
+});
