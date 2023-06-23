@@ -5,6 +5,8 @@ const username = "Shanae-B";
 const repoList = document.querySelector(".repo-list");
 const repoElement = document.querySelector(".repos");
 const eachRepoData = document.querySelector(".repo-data");
+const backToRepo = document.querySelector(".button-container");
+const filterInput = document.querySelector("filter-repos hide");
 
 
 //fetch Github profile info
