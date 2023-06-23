@@ -59,15 +59,17 @@ const specificRepo = async function (repoName) {
     const exactRepo = await fetch(`https://api.github.com/repos/${username}/${repoName}`);
     const repoInfo = await exactRepo.json();
     console.log(repoInfo);
-    const fetchLanguages = await fetch(`https://api.github.com/repos/${username}/${repoName}/languages`);
+    const fetchLanguages = await fetch(`https://api.github.com/repos/${username}/${repoInfo.name}/languages`);
     const languageData = await fetchLanguages.json();
-    console.log(languageData);
+    //console.log(languageData);
 
     //created array for languages
-    let languages = [];
-    languages.push(languageData);
-    for (let languages in languageData);
-    console.log(languages);
+    const languages = [];
+    for (const language in languageData) {
+        languages.push(language);
+    }
+    //console.log(languages);
+    displayRepoInfo(repoInfo, languages);
 
 };
 
@@ -75,12 +77,14 @@ const specificRepo = async function (repoName) {
 const displayRepoInfo = function (repoInfo, languages) {
 
     eachRepoData.innerHTML = " ";
+    eachRepoData.classList.remove("hide");
+    repoElement.classList.add("hide");
     const div = document.createElement("div");
     div.innerHTML = `<h3>Name: ${repoInfo.name}</h3>
     <p>Description: ${repoInfo.description}</p>
     <p>Default Branch: ${repoInfo.default_branch}</p>
     <p>Languages: ${languages.join(", ")}</p>
-    <a class="visit" href="${`https://api.github.com/repos/${username}/${repoName}`}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`
+    <a class="visit" href="${repoInfo.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>`;
     eachRepoData.append(div);
 
 };
@@ -91,6 +95,5 @@ repoList.addEventListener("click", function (e) {
         const repoName = e.target.innerText;
         specificRepo(repoName);
     }
-
 
 });
