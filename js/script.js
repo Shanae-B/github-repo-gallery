@@ -9,6 +9,8 @@ const backToRepo = document.querySelector(".view-repos");
 const filterInput = document.querySelector(".filter-repos");
 
 
+
+
 //fetch Github profile info
 const getData = async function () {
 
@@ -109,3 +111,28 @@ backToRepo.addEventListener("click", function (e) {
     eachRepoData.classList.add("hide");
     backToRepo.classList.add("hide");
 });
+
+filterInput.addEventListener("input", function (e) {
+
+    const searchField = e.target.value;
+    console.log(searchField);
+    const repos = document.querySelectorAll(".repo");
+    const lowerCaseText = searchField.toLowerCase();
+
+    for (const repo of repos) {
+
+        const searchLowerText = repo.innerText.toLowerCase();
+        if (searchLowerText.includes(lowerCaseText)) {
+
+            repo.classList.remove("hide");
+        }
+
+        else {
+            repo.classList.add("hide");
+        }
+    }
+
+
+});
+
+
