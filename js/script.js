@@ -56,6 +56,7 @@ const displayEachRepo = function (repos) {
         li.classList.add("repo");
         li.innerHTML = `<h3>${repo.name}</h3>`;
         repoList.append(li);
+        filterInput.classList.remove("hide");
     }
 };
 
